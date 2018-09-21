@@ -24,6 +24,17 @@ app.use((req, res, next) => {
     next(error404);
 });
 
+app.post('/comment', (req, res) => {
+    console.log(req.body);
+    var newComment = {
+        name: req.body.name,
+        email: req.body.email,
+        comment: req.body.comment
+    }
+    pusher.trigger('flash-comments', 'new_comment', newComment);
+    res.json({created: true});
+})
+
 module.exports = app;
 
 app.listen(9000, () => {
