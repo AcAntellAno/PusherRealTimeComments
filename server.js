@@ -1,6 +1,15 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+var Pusher = require('pusher');
+
+var pusher = new Pusher({
+    appId: '',
+    key: '',
+    secret: '',
+    cluster: 'ap2',
+    encrypted: true
+});
 
 var app = express();
 
