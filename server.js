@@ -7,7 +7,7 @@ var pusher = new Pusher({
     appId: '',
     key: '',
     secret: '',
-    cluster: 'ap2',
+    cluster: 'us2',
     encrypted: true
 });
 
@@ -16,13 +16,6 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-
-//Error Handle for 404 Pages
-app.use((req, res, next) => {
-    var error404 = new Error('Route Not Found');
-    error404.status = 404;
-    next(error404);
-});
 
 app.post('/comment', (req, res) => {
     console.log(req.body);
@@ -33,7 +26,14 @@ app.post('/comment', (req, res) => {
     }
     pusher.trigger('flash-comments', 'new_comment', newComment);
     res.json({created: true});
-})
+});
+
+//Error Handle for 404 Pages
+app.use((req, res, next) => {
+    var error404 = new Error('Route Not Found');
+    error404.status = 404;
+    next(error404);
+});
 
 module.exports = app;
 
