@@ -4,17 +4,19 @@ var bodyParser = require('body-parser');
 var Pusher = require('pusher');
 
 var pusher = new Pusher({
-    appId: '',
-    key: '',
-    secret: '',
-    cluster: 'us2',
+    appId: '<ADD_YOUR_APPID>',
+    key: '<ADD_YOUR_KEY>',
+    secret: '<ADD_YOUR_SECRECT>',
+    cluster: '<ADD_YOUR_CLUSTER>',
     encrypted: true
 });
 
 var app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/comment', (req, res) => {
@@ -25,7 +27,9 @@ app.post('/comment', (req, res) => {
         comment: req.body.comment
     }
     pusher.trigger('flash-comments', 'new_comment', newComment);
-    res.json({created: true});
+    res.json({
+        created: true
+    });
 });
 
 //Error Handle for 404 Pages
