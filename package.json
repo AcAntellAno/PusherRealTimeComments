@@ -18,6 +18,7 @@
   "homepage": "https://github.com/AcAntellAno/PusherRealTimeComments#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "cryptiles": "^4.1.2",
     "express": "^4.16.3",
     "path": "^0.12.7",
     "pusher": "^2.1.3"
